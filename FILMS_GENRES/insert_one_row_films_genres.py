@@ -3,7 +3,7 @@
 
 # Importer le fichier "InsertOneTable" dans lequel il y a quelques classes et méthodes en rapport avec le sujet d'insertion dans UNE SEULE table.
 from DATABASE.INSERT import insert_one_table
-
+#ABCDEMACCAUD
 try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
     insert_records = insert_one_table.DbInsertOneTable()
