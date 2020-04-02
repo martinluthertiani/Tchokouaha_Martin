@@ -77,3 +77,4 @@ class DbUpdateOneTable():
             self.connection_dbc.DBcursor.close()
             self.connection_dbc.close_connection()
             print("DBcursor et DB fermés")
+            # Bonjour Monsieur OM; j'ai à peu près compris comment cela fonctionne
