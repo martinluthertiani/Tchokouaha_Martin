@@ -8,7 +8,7 @@ try:
     # OM 2020.01.28 Une instance "insert_records" pour permettre l'utilisation des méthodes de la classe DbInsertOneTable
     insert_records = insert_one_table.DbInsertOneTable()
 
-    valeur_ins_fkgenre = 10
+    valeur_ins_fkgenres = 10
     valeur_ins_fkfilm = 3
     # Afficher les valeurs dans la console...c'est tout, vraiment tout !
     print("valeur_fkgenre ",valeur_ins_fkgenre, "valeur_fkfilm ",valeur_ins_fkfilm)
