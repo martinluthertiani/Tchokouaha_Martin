@@ -1,5 +1,5 @@
 # insert_one_table.py
-# OM 2020.03.10 le but est d'insérer des valeurs en MySql dans une seule table
+# Martin Luther 2020.03.10 le but est d'insérer des valeurs en MySql dans une seule table
 import pymysql
 from DATABASE import connect_db
 
@@ -20,7 +20,7 @@ class DbInsertOneTable():
                         pas de valeurs
         """
         try:
-            # OM 2020.01.28 CONNECTION A LA BD
+            # Martin Luther 2020.01.28 CONNECTION A LA BD
             self.connection_dbc = connect_db.DatabaseTools()
             # Un simple test qui renvoie un message dans la console suivant l'état de la BD
             self.connection_dbc.is_connection_open()
@@ -28,10 +28,10 @@ class DbInsertOneTable():
             # Pour aider à comprendre les types de données on affiche dans la console
             print("type >>> requete_insert_mysql ",type(requete_insert_mysql))
             print("type >>> valeurs_a_inserer ",type(valeurs_a_inserer))
-            # OM 2020.03.11 Execute la requête avec un passage de paramètres
+            # Martin Luther 2020.03.11 Execute la requête avec un passage de paramètres
             self.connection_dbc.DBcursor.execute(requete_insert_mysql, {'values_insert' : valeurs_a_inserer})
 
-            # OM 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
             self.connection_dbc.db.commit()
 
         except pymysql.Error as error:
@@ -40,32 +40,32 @@ class DbInsertOneTable():
             print(" Il y a une ERREUR : %s", error)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.DataError as error1:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une DataError : %s", error1)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.DatabaseError as error2:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une DatabaseError : %s", error2)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.Warning as error3:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une Warning : %s", error3)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.MySQLError as error4:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une MySQLError : %s", error4)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.IntegrityError as error5:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une IntegrityError : %s", error5)
             print("connection_dbc.db.rollback() insertOneRecord")
         except:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print("Unknown error occurred")
         finally:
@@ -75,7 +75,7 @@ class DbInsertOneTable():
             print("DBcursor et DB fermés")
 
 
-    def insert_one_record_many_values_one_table(self, requete_insert_mysql, valeurs_insertion):
+    def insert_one_record_many_values_one_table(self, requete_insert_mysql: object, valeurs_insertion: object) -> object:
         """
         Méthode qui permet d'insérer les valeurs passées en paramètres.
         OM 2020.03.24
@@ -86,7 +86,7 @@ class DbInsertOneTable():
                         pas de valeurs
         """
         try:
-            # OM 2020.01.28 CONNECTION A LA BD
+            # Martin Luther 2020.01.28 CONNECTION A LA BD
             self.connection_dbc = connect_db.DatabaseTools()
             # Un simple test qui renvoie un message dans la console suivant l'état de la BD
             self.connection_dbc.is_connection_open()
@@ -97,44 +97,44 @@ class DbInsertOneTable():
             # Afficher les docstrings...très importantes pour votre projet.
             print(self.insert_one_record_many_values_one_table.__doc__)
 
-            # OM 2020.03.11 Execute la requête avec un passage de paramètres
+            # Martin Luther 2020.03.11 Execute la requête avec un passage de paramètres
             self.connection_dbc.DBcursor.execute(requete_insert_mysql, valeurs_insertion)
 
-            # OM 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour confirmer l'insertion des données (en cas de problèmes : rollback)
             self.connection_dbc.db.commit()
 
         except pymysql.Error as error:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une ERREUR : %s", error)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.DataError as error1:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une DataError : %s", error1)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.DatabaseError as error2:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une DatabaseError : %s", error2)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.Warning as error3:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une Warning : %s", error3)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.MySQLError as error4:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une MySQLError : %s", error4)
             print("connection_dbc.db.rollback() insertOneRecord")
         except pymysql.IntegrityError as error5:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print(" Il y a une IntegrityError : %s", error5)
             print("connection_dbc.db.rollback() insertOneRecord")
         except:
-            # OM 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
+            # Martin Luther 2020.03.11 L'instruction suivante est indispensable pour annuler l'insertion des données (commande opposée : COMMIT)
             self.connection_dbc.db.rollback()
             print("Unknown error occurred")
         finally:

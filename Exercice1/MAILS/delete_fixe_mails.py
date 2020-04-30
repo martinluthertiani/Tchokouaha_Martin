@@ -1,5 +1,5 @@
-# delete_fixe_genres.py
-# OM 2020.03.10 le but est d'effacer une ligne d'une table en MySql.
+# delete_fixe_mails.py
+# Martin Luther 2020.03.10 le but est d'effacer une ligne d'une table en MySql.
 # On doit modifier la valeur de la variable "numero_ligne_table_delete"
 # Si on démarre ce fichier plusieurs fois, alors MySql ne renvoie pas d'erreur, car effacer une ligne inexistante dans une table
 # ce n'est pas considéré comme une erreur, mais simplement MySql renvoie le nombre de lignes effacées dans ce cas : 0 lignes effacées.
@@ -8,14 +8,14 @@
 from DATABASE.DELETE import delete_one_record_one_table
 
 try:
-    # OM 2020.01.28 Une instance "delete_record" pour permettre l'utilisation des méthodes de la classe DbDeleteOneTable
+    # Martin Luther 2020.01.28 Une instance "delete_record" pour permettre l'utilisation des méthodes de la classe DbDeleteOneTable
     delete_record = delete_one_record_one_table.DbDeleteOneTable()
-    # OM 2020.01.28 Impose le numéro de la ligne à effacer dans la table.
+    # Martin Luther 2020.01.28 Impose le numéro de la ligne à effacer dans la table.
     # A changer à la main pour essayer sur votre BD.
     numero_ligne_table_delete = 7
-    # OM 2020.03.11 Fonction DELETE avec le numéro de la ligne à effacer passée en paramètre.
-    delete_record.delete_one_record_one_table("""DELETE FROM t_genres WHERE id_genre = %(no_ligne_delete)s""",numero_ligne_table_delete)
+    # Martin Luther 2020.03.11 Fonction DELETE avec le numéro de la ligne à effacer passée en paramètre.
+    delete_record.delete_one_record_one_table("""DELETE FROM t_Mails WHERE id_Mails = %(no_ligne_delete)s""",numero_ligne_table_delete)
 
 except Exception as erreur:
-    # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
+    # Martin Luther 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
     print("error message: {0}".format(erreur))
