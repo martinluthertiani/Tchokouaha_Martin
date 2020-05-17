@@ -5,7 +5,7 @@ from flask import flash
 
 from Exercice2_Tiani_Martin_Gerbersystemsclients_1c_2020.APP_PERSONNES.DATABASE.erreurs import MaBdErreurConnexion
 
-
+# Ma base de données
 class GestionGenres():
     def __init__(self):
         try:
