@@ -30,8 +30,7 @@ class GestionFilms():
             # la commande MySql classique est "SELECT * FROM t_films"
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
-            strsql_films_afficher = """SELECT id_film, nom_film, duree_film, description_film,
-                                        cover_link_film, date_sortie_film FROM t_films"""
+            strsql_films_afficher = """SELECT `id_Mails`, `Nom_Mail` FROM `t_mails`"""
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
                 # Envoi de la commande MySql

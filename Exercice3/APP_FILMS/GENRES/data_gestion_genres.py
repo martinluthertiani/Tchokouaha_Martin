@@ -30,7 +30,8 @@ class GestionGenres():
                 # Afficher soit la liste des genres dans l'ordre inverse ou simplement le genre sélectionné
                 # par l'action edit
                 if valeur_order_by == "ASC" and id_genre_sel == 0:
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genres ORDER BY id_genre ASC"""
+                    strsql_genres_afficher = """SELECT id_Pers, Nom_Pers, Prenom_Pers, RaisonSociale_Pers, NomRespo_Pers, PrenomRespo_Pers 
+                                        FROM `t_personnes`"""
                     mc_afficher.execute(strsql_genres_afficher)
                 elif valeur_order_by == "ASC":
                     # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
@@ -39,11 +40,13 @@ class GestionGenres():
                     # donc, je précise les champs à afficher
                     # Constitution d'un dictionnaire pour associer l'id du genre sélectionné avec un nom de variable
                     valeur_id_genre_selected_dictionnaire = {"value_id_genre_selected": id_genre_sel}
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genres  WHERE id_genre = %(value_id_genre_selected)s"""
+                    strsql_genres_afficher = """SELECT id_Pers, Nom_Pers, Prenom_Pers, RaisonSociale_Pers, NomRespo_Pers, PrenomRespo_Pers 
+                                        FROM `t_personnes`  WHERE id_Pers = %(value_id_genre_selected)s"""
                     # Envoi de la commande MySql
                     mc_afficher.execute(strsql_genres_afficher, valeur_id_genre_selected_dictionnaire)
                 else:
-                    strsql_genres_afficher = """SELECT id_genre, intitule_genre FROM t_genres ORDER BY id_genre DESC"""
+                    strsql_genres_afficher = """SELECT id_Pers, Nom_Pers, Prenom_Pers, RaisonSociale_Pers, NomRespo_Pers, PrenomRespo_Pers 
+                                        FROM `t_personnes` ORDER BY id_Pers DESC"""
                     # Envoi de la commande MySql
                     mc_afficher.execute(strsql_genres_afficher)
                 # Récupère les données de la requête.
@@ -68,7 +71,9 @@ class GestionGenres():
         try:
             print(valeurs_insertion_dictionnaire)
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
-            strsql_insert_genre = """INSERT INTO t_genres (id_genre,intitule_genre) VALUES (NULL,%(value_intitule_genre)s)"""
+            # strsql_insert_genre = """INSERT INTO t_genres (id_genre,intitule_genre) VALUES (NULL,%(value_intitule_genre)s)"""
+            strsql_insert_genre = """INSERT INTO `t_personnes` (`id_Pers`, `Nom_Pers`, `Prenom_Pers`, `RaisonSociale_Pers`, `NomRespo_Pers`, `PrenomRespo_Pers`) 
+                                        VALUES (NULL, %(NomPerso)s, %(PrenomPerso)s, %(RSPerso)s, %(NomRespo)s, %(PrenomRespo)s);"""
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
             # ainsi quand elle aura terminé l'insertion des données le destructeur de la classe "MaBaseDeDonnee"
@@ -88,7 +93,7 @@ class GestionGenres():
             print(valeur_id_dictionnaire)
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Commande MySql pour afficher le genre sélectionné dans le tableau dans le formulaire HTML
-            str_sql_id_genre = "SELECT id_genre, intitule_genre FROM t_genres WHERE id_genre = %(value_id_genre)s"
+            str_sql_id_genre = "SELECT id_Pers, Nom_Pers, Prenom_Pers, RaisonSociale_Pers, NomRespo_Pers, PrenomRespo_Pers FROM `t_personnes` WHERE id_Pers = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -116,7 +121,13 @@ class GestionGenres():
             # OM 2019.04.02 Commande MySql pour la MODIFICATION de la valeur "CLAVIOTTEE" dans le champ "nameEditIntituleGenreHTML" du form HTML "GenresEdit.html"
             # le "%s" permet d'éviter des injections SQL "simples"
             # <td><input type = "text" name = "nameEditIntituleGenreHTML" value="{{ row.intitule_genre }}"/></td>
-            str_sql_update_intitulegenre = "UPDATE t_genres SET intitule_genre = %(value_name_genre)s WHERE id_genre = %(value_id_genre)s"
+            str_sql_update_intitulegenre = "UPDATE t_personnes " \
+                                           "SET Nom_Pers = %(NomPerso)s," \
+                                           "Prenom_Pers = %(PrenomPerso)s, " \
+                                           "RaisonSociale_Pers = %(RSPerso)s, " \
+                                           "NomRespo_Pers = %(NomRespo)s, " \
+                                           "PrenomRespo_Pers = %(PrenomRespo)s " \
+                                           "WHERE id_Pers = %(id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -154,7 +165,7 @@ class GestionGenres():
 
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
             # Commande MySql pour afficher le genre sélectionné dans le tableau dans le formulaire HTML
-            str_sql_select_id_genre = "SELECT id_genre, intitule_genre FROM t_genres WHERE id_genre = %(value_id_genre)s"
+            str_sql_select_id_genre = "SELECT id_Pers, Nom_Pers, Prenom_Pers, RaisonSociale_Pers, NomRespo_Pers, PrenomRespo_Pers FROM `t_personnes` WHERE id_Pers = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"
@@ -186,7 +197,7 @@ class GestionGenres():
             # OM 2019.04.02 Commande MySql pour EFFACER la valeur sélectionnée par le "bouton" du form HTML "GenresEdit.html"
             # le "%s" permet d'éviter des injections SQL "simples"
             # <td><input type = "text" name = "nameEditIntituleGenreHTML" value="{{ row.intitule_genre }}"/></td>
-            str_sql_delete_intitulegenre = "DELETE FROM t_genres WHERE id_genre = %(value_id_genre)s"
+            str_sql_delete_intitulegenre = "DELETE FROM t_personnes where id_Pers = %(value_id_genre)s"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             # la subtilité consiste à avoir une méthode "mabd_execute" dans la classe "MaBaseDeDonnee"

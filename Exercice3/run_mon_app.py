@@ -1,5 +1,6 @@
 # run_mon_app.py
 #
+# Juste un test
 # OM 2020.03.29 Démonstration de l'utilisation du microframework Flask
 # Des routes différentes sont définies
 # Le retour des données se fait grâce à une page en HTML et le langage JINJA
@@ -59,4 +60,4 @@ if __name__ == "__main__":
     print("obj_mon_application.url_map ____> ", obj_mon_application.url_map)
     obj_mon_application.run(debug=True,
                             host="127.0.0.1",
-                            port="5005")
+                            port="5006")

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Tchokouaha\Exercice3\venv"
+VIRTUAL_ENV="C:\Tchokouaha_Martin_Exercices_104_1C_2020\Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -71,13 +71,19 @@ def genres_add ():
             # OM 2020.04.09 Objet contenant toutes les méthodes pour gérer (CRUD) les données.
             obj_actions_genres = GestionGenres()
             # OM 2020.04.09 Récupère le contenu du champ dans le formulaire HTML "genres_add.html"
-            name_genre = request.form['name_genre_html']
+            NomPerso = request.values['InputNom']
+            PrenomPerson = request.values['InputPrenom']
+            RSPerso = request.values['InputRS']
+            NomRespo = request.values['InputNR']
+            PrenomRespo = request.values['InputPR']
+
+
             # On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
             # des valeurs avec des caractères qui ne sont pas des lettres.
             # Pour comprendre [A-Za-zÀ-ÖØ-öø-ÿ] il faut se reporter à la table ASCII https://www.ascii-code.com/
             # Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
-            if not re.match("^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$",
-                            name_genre):
+            if not re.match("^[a-zA-Zéèàùûêâôë]{1}[a-zA-Zéèàùûêâôë \'-]*[a-zA-Zéèàùûêâôë]$",
+                            NomPerso):
                 # OM 2019.03.28 Message humiliant à l'attention de l'utilisateur.
                 flash(f"Une entrée...incorrecte !! Pas de chiffres, de caractères spéciaux, d'espace à double, "
                       f"de double apostrophe, de double trait union et ne doit pas être vide.", "danger")
@@ -86,7 +92,8 @@ def genres_add ():
             else:
 
                 # Constitution d'un dictionnaire et insertion dans la BD
-                valeurs_insertion_dictionnaire = {"value_intitule_genre": name_genre}
+                valeurs_insertion_dictionnaire = {'NomPerso': NomPerso, 'PrenomPerso': PrenomPerson,'RSPerso': RSPerso ,
+                                 'NomRespo': NomRespo,'PrenomRespo': PrenomRespo}
                 obj_actions_genres.add_genre_data(valeurs_insertion_dictionnaire)
 
                 # OM 2019.03.25 Les 2 lignes ci-après permettent de donner un sentiment rassurant aux utilisateurs.
@@ -198,14 +205,19 @@ def genres_update ():
             id_genre_edit = request.values['id_genre_edit_html']
 
             # Récupère le contenu du champ "intitule_genre" dans le formulaire HTML "GenresEdit.html"
-            name_genre = request.values['name_edit_intitule_genre_html']
-            valeur_edit_list = [{'id_genre': id_genre_edit, 'intitule_genre': name_genre}]
+            NomPerso = request.values['nom_edit_intitule_genre_html']
+            PrenomPerson = request.values['pernom_edit_intitule_genre_html']
+            RSPerso = request.values['rS_edit_intitule_genre_html']
+            NomRespo = request.values['NR_edit_intitule_genre_html']
+            PrenomRespo = request.values['PR_edit_intitule_genre_html']
+            valeur_edit_list = [{'id_genre': id_genre_edit, 'NomPerso': NomPerso, 'PrenomPerso': PrenomPerson,'RSPerso': RSPerso ,
+                                 'NomRespo': NomRespo,'PrenomRespo': PrenomRespo}]
             # On ne doit pas accepter des valeurs vides, des valeurs avec des chiffres,
             # des valeurs avec des caractères qui ne sont pas des lettres.
             # Pour comprendre [A-Za-zÀ-ÖØ-öø-ÿ] il faut se reporter à la table ASCII https://www.ascii-code.com/
             # Accepte le trait d'union ou l'apostrophe, et l'espace entre deux mots, mais pas plus d'une occurence.
-            if not re.match("^([A-Z]|[a-zÀ-ÖØ-öø-ÿ])[A-Za-zÀ-ÖØ-öø-ÿ]*['\- ]?[A-Za-zÀ-ÖØ-öø-ÿ]+$",
-                            name_genre):
+            if not re.match("^[a-zA-Zéèàùûêâôë]{1}[a-zA-Zéèàùûêâôë \'-]*[a-zA-Zéèàùûêâôë]$",
+                            NomPerso):
                 # En cas d'erreur, conserve la saisie fausse, afin que l'utilisateur constate sa misérable faute
                 # Récupère le contenu du champ "intitule_genre" dans le formulaire HTML "GenresEdit.html"
                 # name_genre = request.values['name_edit_intitule_genre_html']
@@ -217,7 +229,8 @@ def genres_update ():
                 # Constitution d'une liste pour que le formulaire d'édition "genres_edit.html" affiche à nouveau
                 # la possibilité de modifier l'entrée
                 # Exemple d'une liste : [{'id_genre': 13, 'intitule_genre': 'philosophique'}]
-                valeur_edit_list = [{'id_genre': id_genre_edit, 'intitule_genre': name_genre}]
+                valeur_edit_list = [{'id_genre': id_genre_edit, 'NomPerso': NomPerso, 'PrenomPerso': PrenomPerson,'RSPerso': RSPerso ,
+                                 'NomRespo': NomRespo,'PrenomRespo': PrenomRespo}]
 
                 # DEBUG bon marché :
                 # Pour afficher le contenu et le type de valeurs passées au formulaire "genres_edit.html"
@@ -225,7 +238,8 @@ def genres_update ():
                 return render_template('genres/genres_edit.html', data=valeur_edit_list)
             else:
                 # Constitution d'un dictionnaire et insertion dans la BD
-                valeur_update_dictionnaire = {"value_id_genre": id_genre_edit, "value_name_genre": name_genre}
+                valeur_update_dictionnaire = {'id_genre': id_genre_edit, 'NomPerso': NomPerso, 'PrenomPerso': PrenomPerson,'RSPerso': RSPerso ,
+                                 'NomRespo': NomRespo,'PrenomRespo': PrenomRespo}
 
                 # OM 2020.04.09 Objet contenant toutes les méthodes pour gérer (CRUD) les données.
                 obj_actions_genres = GestionGenres()

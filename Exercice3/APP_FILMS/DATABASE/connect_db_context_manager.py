@@ -1,5 +1,5 @@
 # connect_db_context_manager.py
-# Ma base de données
+#
 # OM 2020.04.05 Classe pour se connecter à la base de donnée.
 #
 # La notion en Python de "context manager" aide à simplifier le code.
@@ -12,7 +12,7 @@
 from APP_FILMS.DATABASE.erreurs import *
 # Petits messages "flash", échange entre Python et Jinja dans une page en HTML
 from flask import flash
-# Ma base de données
+
 
 class MaBaseDeDonnee():
     # Quand on instancie la classe il interprète le code __init__
@@ -20,7 +20,7 @@ class MaBaseDeDonnee():
         self.host = '127.0.0.1'
         self.user = 'root'
         self.password = 'root'
-        self.db = "TIANI_MARTIN_GERBERSYSTEMSCLIENTS_1C_2020"
+        self.db = "tiani_martin_gerbersytemsclients_1c_2020"
 
         self.connexion_bd = None
         try:
