@@ -7,7 +7,7 @@
 			<p>
 				Effacer ce genre.
 			</p>
-			<form method="POST" action="{{ url_for('genres_delete') }}">
+			<form method="POST" action="{{ url_for('films_delete') }}">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
@@ -17,41 +17,18 @@
                             <th>
                                 Nom
                             </th>
-                            <th>
-                                Prenom
-                            </th>
-                            <th>
-                                Raison Social
-                            </th>
-                            <th>
-                                Nom Responsable
-                            </th>
-                            <th>
-                                Prenom Responsable
-                            </th>
                         </tr>
                     </thead>
                     {% for row in data %}
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" name="id_genre_delete_html" value="{{ row.id_Pers }}"/>
+                                    <input type="hidden" name="id_genre_delete_html" value="{{ row.id_Mails }}"/><a>{{ row.id_Mails }}</a>
                                 </td>
                                 <td>
-                                    <a>{{ row.Nom_Pers }}</a>
+                                    <a>{{ row.Nom_Mail }}</a>
                                 </td>
-                                <td>
-                                    {{ row.Prenom_Pers }}
-                                </td>
-                                <td>
-                                    {{ row.RaisonSociale_Pers }}
-                                </td>
-                                <td>
-                                    {{ row.NomRespo_Pers }}
-                                </td>
-                                <td>
-                                    {{ row.PrenomRespo_Pers }}
-                                </td>
+
 
                                 <td>
                                     <button class="btn btn-danger" type="submit">EFFACER</button>

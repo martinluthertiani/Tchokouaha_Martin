@@ -30,75 +30,18 @@
 
 <div class="container">
 		<div class="col-md-12">
-			<p>
-				Tagselect, c'est une DROPBOX qui surgit quand on sélectionne l'espace "TAGS". Le composant TAGSELECT est à disposition sur ce site :
-                 <a href="https://www.jqueryscript.net/form/tags-selector-tagselect.html"
-                    target="_blank">https://www.jqueryscript.net/form/tags-selector-tagselect.html</a>
-				Films.
-			</p>
-            <table class="table table-responsive-sm">
-                {% if data_film_selected %}
-                    <thead>
-                        <tr>
-                            <th class="">
-                                id
-                            </th>
-                            <th class="">
-                                Titre
-                            </th>
-                            <th class="">
-                                Durée
-                            </th>
-                            <th class="">
-                                Date sortie
-                            </th>
-                            <th class="">
-                                Description
-                            </th>
-                            <th class="">
-                                Affiche
-                            </th>
-                        </tr>
-                    </thead>
-            {% endif %}
 
-            {% for row in data_film_selected %}
-				<tbody>
-					<tr>
-						<td class="align-middle">
-							{{ row.id_film }}
-						</td>
-						<td class="align-middle">
-							{{ row.nom_film }}
-						</td>
-						<td class="align-middle">
-							{{ row.duree_film|default("", True) }}
-						</td>
-						<td class="align-middle">
-							{{ row.date_sortie_film|default("", True) }}
-						</td>
-						<td class="align-middle">
-							{{ row.description_film|default("", True) }}
-						</td>
-						<td class="align-middle">
-<!--                            <img class="img-thumbnail" src={{ row.cover_link_film|default(None, True) }} style="border: 0;display: block;width:auto;max-height:450px;" alt = "Covid-19 grand semi-confinement mod 104">-->
-                            <img class="img-thumbnail" src={{ row.cover_link_film|default(None, True) }} style="border: 0;" alt = "Covid-19 grand semi-confinement mod 104">
-						</td>
-					</tr>
-				</tbody>
-            {% else %}
-				<tbody>
-					<tr>
-						<td>
-							Aucun film.
-						</td>
-						<td>
-							<a class="btn btn-primary" href="{{ url_for('avertissement_sympa_pour_geeks') }}" role="button">Add</a>
-						</td>
-					</tr>
-				</tbody>
-            {% endfor %}
-			</table>
+            <table>
+                <a>Liaison originelle</a>
+
+                {% for item in datasourceselected_combo %}
+                    <tr>
+                        <td><b>{{ item.Nom_Pers }}</b></td>
+                        <td><b>{{ item.Pernom_Pers }}</b></td>
+                        <td><b>{{ item.Nom_Mail }}</b></td>
+                    </tr>
+                {% endfor %}
+            </table>
 		</div>
 	</div>
 
@@ -106,15 +49,23 @@
     <div class="row mx-md-n5">
       <div class="col px-md-5">
           <div class="p-3">
+          <a>Les listes suivantes sont composées de tous les éléments, afin de pouvoir la modifier selon votre choix</a>
+          <br>
             <form id="form_tags_select_confirm" action="{{ url_for('gf_update_genre_film_selected') }}" method="POST">
-                <div class="qtagselect isw360">
-                    <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
-                        {% for row in data_genres_non_attribues %}
-                            <option value="{{ row.id_genre }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.intitule_genre }}</option>
-                        {% endfor %}
 
-                        {% for row in data_genres_attribues %}
-                            <option value="{{ row.id_genre }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.intitule_genre }}</option>
+                <div class="qtagselect isw360">
+                    <input type="hidden" name="id_pers_mail" value="{{ datasourceselected_combo[0].id_Pers_Mail }}"/>
+                    <a>Nouvel-le personne</a>
+                    <select  name="newPersonne" >
+                        {% for row in datasourceother_addres %}
+                            <option value="{{ row.id_Pers }}" name="name_tags_non_attribues_html" class="isblue" >{{ row.Nom_Pers }}{{ row.Pernom_Pers }}{{ row.RaisonSociale_Pers }}</option>
+                        {% endfor %}
+                    </select>
+                <br>
+                    <a>Nouveau mail lié  :</a>
+                    <select  name="newEmail"  >
+                        {% for row in datasourceother_films %}
+                            <option value="{{ row.id_Mails }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Nom_Mail }}</option>
                         {% endfor %}
                     </select>
                 </div>

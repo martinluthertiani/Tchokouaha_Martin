@@ -7,51 +7,27 @@
 			<p>
 				Modifier ce genre.
 			</p>
-			<form method="POST" action="{{ url_for('genres_update') }}">
+			<form method="POST" action="{{ url_for('films_update') }}">
                 <table class="table table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th>
-                                id genre
-                            </th>
+
                             <th>
                                 Nom
                             </th>
-                            <th>
-                                Prenom
-                            </th>
-                            <th>
-                                Raison social
-                            </th>
-                            <th>
-                                Nom Respo.
-                            </th>
-                            <th>
-                                Prenom Respo.
-                            </th>
+
                         </tr>
                     </thead>
                     {% for row in data %}
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="hidden" name="id_genre_edit_html" value="{{ row.id_Pers }}"/>
+                                    <input type="hidden" name="id_email_edit_html" value="{{ row.id_Mails }}"/>
                                 </td>
                                 <td>
-                                    <input type = "text" name = "nom_edit_intitule_genre_html" value="{{ row.Nom_Pers }}"/>
+                                    <input type = "text" style="width: 100%" name = "UpdatedEmail" value="{{ row.Nom_Mail }}"/>
                                 </td>
-                                <td>
-                                    <input type = "text" name = "pernom_edit_intitule_genre_html" value="{{ row.Prenom_Pers }}"/>
-                                </td>
-                                <td>
-                                    <input type = "text" name = "rS_edit_intitule_genre_html" value="{{ row.RaisonSociale_Pers }}"/>
-                                </td>
-                                <td>
-                                    <input type = "text" name = "NR_edit_intitule_genre_html" value="{{ row.NomRespo_Pers }}"/>
-                                </td>
-                                <td>
-                                    <input type = "text" name = "PR_edit_intitule_genre_html" value="{{ row.PrenomRespo_Pers }}"/>
-                                </td>
+
                                 <td>
                                     <button class="btn btn-warning" type="submit">Update</button>
                                 </td>

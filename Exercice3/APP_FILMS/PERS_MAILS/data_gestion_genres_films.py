@@ -28,7 +28,7 @@ class GestionGenresFilms():
             # la commande MySql classique est "SELECT * FROM t_genres"
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
-            strsql_genres_afficher = """SELECT `id_Pers_Mail`, `fk_Pers`, `fk_Mails`, `DateEnreg_Mail` FROM `t_pers_mails` ASC"""
+            strsql_genres_afficher = """SELECT t_personnes.Nom_Pers, t_personnes.Prenom_Pers,t_mails.Nom_Mail FROM `t_pers_mails` inner join t_personnes on t_personnes.id_Pers = t_pers_mails.fk_Pers inner join t_mails on t_mails.id_Mails = t_pers_mails.fk_Mails ORDER BY t_personnes.Nom_Pers """
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
                 # Envoi de la commande MySql
@@ -51,8 +51,8 @@ class GestionGenresFilms():
             # Ainsi on peut avoir un message d'erreur personnalisé.
             raise MaBdErreurConnexion(f"DGG gad pei {msg_erreurs['ErreurConnexionBD']['message']} {erreur.args[1]}")
 
-    def genres_films_afficher_data (self, valeur_id_film_selected_dict):
-        print("valeur_id_film_selected_dict...", valeur_id_film_selected_dict)
+    def genres_films_afficher_data (self, id_personne, id_email):
+        print("valeur_id_film_selected_dict...", id_personne)
         try:
 
             # OM 2020.04.07 C'EST LA QUE VOUS ALLEZ DEVOIR PLACER VOTRE PROPRE LOGIQUE MySql
@@ -60,41 +60,35 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_film_selected = """SELECT id_Mails, Nom_Mail GROUP_CONCAT(id_Pers) as GenresFilms FROM t_Pers_Mails AS T1
-                                        INNER JOIN t_Mails AS T2 ON T2.id_Mails = T1.fk_Mails
-                                        INNER JOIN t_Personnes AS T3 ON T3.id_Pers = T1.fk_Pers
-                                        WHERE id_Mails = %(value_id_Mails_selected)s"""
+            strsql_film_selected = "SELECT t_personnes.id_Pers,t_pers_mails.id_Pers_Mail ,t_mails.id_Mails, t_personnes.Nom_Pers, t_personnes.Prenom_Pers,t_mails.Nom_Mail FROM `t_pers_mails` inner join t_personnes on t_personnes.id_Pers = t_pers_mails.fk_Pers inner join t_mails on t_mails.id_Mails = t_pers_mails.fk_Mails  WHERE t_personnes.id_Pers = " + id_personne +" and t_mails.id_Mails = " + id_email +" ORDER BY t_personnes.Nom_Pers"
 
-            strsql_genres_films_non_attribues = """SELECT id_Pers, Nom_Pers FROM t_Personnes
-                                                    WHERE id_Pers not in(SELECT id_Pers as idGenresFilms FROM t_Pers_Mails AS T1
-                                                    INNER JOIN t_Mails AS T2 ON T2.id_Mails = T1.fk_Mails
-                                                    INNER JOIN t_Personnes AS T3 ON T3.id_Pers = T1.fk_Pers
-                                                    WHERE id_Mails = %(value_id_Mails_selected)s)"""
+            strsql_genres_films_non_attribues = "SELECT `id_Pers`,  `Nom_Pers`,`Prenom_Pers`,`RaisonSociale_Pers` FROM `t_personnes` "
 
-            strsql_genres_films_attribues = """SELECT id_Mails, id_Pers, Nom_Pers FROM t_Pers_Mails AS T1
-                                            INNER JOIN t_Mails AS T2 ON T2.id_Mails = T1.fk_Mails
-                                            INNER JOIN t_Personnes AS T3 ON T3.id_Pers = T1.fk_Pers
-                                            WHERE id_Pers = %(value_id_Mails_selected)s"""
+            strsql_genres_films_attribues = "SELECT `id_Mails`,`Nom_Mail` FROM `t_mails` where `id_Mails`"
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
+
                 # Envoi de la commande MySql
-                mc_afficher.execute(strsql_genres_films_non_attribues, valeur_id_film_selected_dict)
+                mc_afficher.execute(strsql_film_selected)
+                # Récupère les données de la requête.
+                data_film_selected = mc_afficher.fetchall()
+                # Affichage dans la console
+                print("data_film_selected  ", data_film_selected, " Type : ", type(data_film_selected))
+
+
+                # Envoi de la commande MySql
+                mc_afficher.execute(strsql_genres_films_non_attribues)
                 # Récupère les données de la requête.
                 data_genres_films_non_attribues = mc_afficher.fetchall()
                 # Affichage dans la console
                 print("dfad data_genres_films_non_attribues ", data_genres_films_non_attribues, " Type : ",
                       type(data_genres_films_non_attribues))
 
-                # Envoi de la commande MySql
-                mc_afficher.execute(strsql_film_selected, valeur_id_film_selected_dict)
-                # Récupère les données de la requête.
-                data_film_selected = mc_afficher.fetchall()
-                # Affichage dans la console
-                print("data_film_selected  ", data_film_selected, " Type : ", type(data_film_selected))
+
 
                 # Envoi de la commande MySql
-                mc_afficher.execute(strsql_genres_films_attribues, valeur_id_film_selected_dict)
+                mc_afficher.execute(strsql_genres_films_attribues)
                 # Récupère les données de la requête.
                 data_genres_films_attribues = mc_afficher.fetchall()
                 # Affichage dans la console
@@ -123,11 +117,7 @@ class GestionGenresFilms():
             # Pour "lever"(raise) une erreur s'il y a des erreurs sur les noms d'attributs dans la table
             # donc, je précise les champs à afficher
 
-            strsql_genres_films_afficher_data_concat = """SELECT id_Mails, Nom_Mail
-                                                            GROUP_CONCAT(Nom_Pers) as GenresFilms FROM t_Pers_Mails AS T1
-                                                            RIGHT JOIN t_Mails AS T2 ON T2.id_Mails = T1.fk_Mails
-                                                            LEFT JOIN t_Personnes AS T3 ON T3.id_Pers = T1.fk_Pers
-                                                            GROUP BY id_Mails"""
+            strsql_genres_films_afficher_data_concat = """SELECT t_personnes.id_Pers, t_mails.id_Mails,  t_personnes.Nom_Pers, t_personnes.Prenom_Pers,t_mails.Nom_Mail FROM `t_pers_mails` inner join t_personnes on t_personnes.id_Pers = t_pers_mails.fk_Pers inner join t_mails on t_mails.id_Mails = t_pers_mails.fk_Mails ORDER BY t_personnes.Nom_Pers """
 
             # Du fait de l'utilisation des "context managers" on accède au curseur grâce au "with".
             with MaBaseDeDonnee().connexion_bd.cursor() as mc_afficher:
@@ -346,3 +336,31 @@ class GestionGenresFilms():
                 # DEBUG bon marché : Pour afficher un message dans la console.
                 print(f"IMPOSSIBLE d'effacer !!! Ce genre est associé à des films dans la t_genres_films !!! : {erreur}")
             raise MaBdErreurDelete(f"DGG Exception {msg_erreurs['ErreurDeleteContrainte']['message']} {erreur}")
+
+    def UpdatePersoMail(self,idpersoEmail, id_personne, id_email):
+        try:
+
+            str_sql_update_intitulegenre = "UPDATE t_pers_mails SET fk_Pers = " +  id_personne  + ", fk_Mails =  "+  id_email  + " WHERE id_Pers_Mail = " + idpersoEmail
+
+            with MaBaseDeDonnee().connexion_bd as mconn_bd:
+                with mconn_bd as mc_cur:
+                    mc_cur.execute(str_sql_update_intitulegenre)
+
+        except (Exception,
+                pymysql.err.OperationalError,
+                pymysql.ProgrammingError,
+                pymysql.InternalError,
+                pymysql.IntegrityError,
+                TypeError) as erreur:
+            # OM 2020.03.01 Message en cas d'échec du bon déroulement des commandes ci-dessus.
+            print(f"Problème update_genre_data Data Gestions Genres numéro de l'erreur : {erreur}")
+            # flash(f"Flash. Problèmes Data Gestions Genres numéro de l'erreur : {erreur}", "danger")
+            # raise Exception('Raise exception... Problème update_genre_data d\'un genre Data Gestions Genres {}'.format(str(erreur)))
+            if erreur.args[0] == 1062:
+                flash(f"Flash. Cette valeur existe déjà : {erreur}", "warning")
+                # Deux façons de communiquer une erreur causée par l'insertion d'une valeur à double.
+                flash(f"Doublon !!! Introduire une valeur différente", "warning")
+                # Message en cas d'échec du bon déroulement des commandes ci-dessus.
+                print(f"Problème update_genre_data Data Gestions Genres numéro de l'erreur : {erreur}")
+
+                raise Exception("Raise exception... Problème update_genre_data d'un genre DataGestionsGenres {erreur}")
