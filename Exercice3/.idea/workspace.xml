@@ -181,7 +181,7 @@
       <workItem from="1593596886807" duration="159000" />
       <workItem from="1593597052837" duration="41000" />
       <workItem from="1593604361923" duration="345000" />
-      <workItem from="1593644942986" duration="255000" />
+      <workItem from="1593644942986" duration="395000" />
     </task>
     <servers />
   </component>
@@ -201,22 +201,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592903918608" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593645181494">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593680568772">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593645181494" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593645181494">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593680568772" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593680568771">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593645181494" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593645181494">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593680568771" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593680568771">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593645181494" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593645181494">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593680568771" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593680568771">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593645181494" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593680568771" />
     <state width="1493" height="223" key="GridCell.Tab.1.bottom" timestamp="1592899912895">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -330,11 +330,11 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Exercice3$connect_db_context_manager.coverage" NAME="connect_db_context_manager Coverage Results" MODIFIED="1593645170555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/DATABASE" />
+    <SUITE FILE_PATH="coverage/Exercice3$connect_db_context_manager.coverage" NAME="connect_db_context_manager Coverage Results" MODIFIED="1593680534112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/DATABASE" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$routes_gestion_films.coverage" NAME="routes_gestion_films Coverage Results" MODIFIED="1591362851603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/FILMS" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$run_mon_app.coverage" NAME="run_mon_app Coverage Results" MODIFIED="1591481487908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$routes_gestion_genres_films.coverage" NAME="routes_gestion_genres_films Coverage Results" MODIFIED="1591475334090" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/GENRES_FILMS" />
-    <SUITE FILE_PATH="coverage/Exercice3$run_mon_app.coverage" NAME="run_mon_app Coverage Results" MODIFIED="1593645179074" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Exercice3$run_mon_app.coverage" NAME="run_mon_app Coverage Results" MODIFIED="1593680568758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$data_gestion_genres.coverage" NAME="data_gestion_genres Coverage Results" MODIFIED="1591352171607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/GENRES" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$data_gestion_films.coverage" NAME="data_gestion_films Coverage Results" MODIFIED="1591361051374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/FILMS" />
     <SUITE FILE_PATH="coverage/Ex3_Tiani_Martin_Gerbersystemsclients_PYTHON_WEB$routes_gestion_genres.coverage" NAME="routes_gestion_genres Coverage Results" MODIFIED="1591352201496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/APP_FILMS/GENRES" />
